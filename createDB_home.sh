@@ -1,8 +1,8 @@
 export LC_COLLATE=C
 shopt -s extglob
-#export PS3= " >> "
-valid='+[a-zA-Z]';
-regex='[0-9][!@#$%^&*()_-+=/)]';
+export PS3='>>> ';
+valid=`+[[a-zA-Z0-9]]`;
+#regex='+[[0-9][!@#$%^&*()_-+=/)]]';
 
 #Check for parent director existence
 if [ -d ~/DataBase ];then
@@ -18,7 +18,7 @@ do
     case $choice in 
         CreateDB )
         read -p "Enter DataBase Name : " DBName
-        if [[ $DBName != $regex ]];then
+        if [[ $DBName = $valid ]];then
             if [ -d $DBName ];then
                 echo "DataBase Name Already Exist !!!"
             else 
