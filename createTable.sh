@@ -6,22 +6,27 @@ typeset -i numberOfCol
 declare -a colNames
 typeset -i IsExist
 
-IsExist=0
-numberOfCol=0
+IsExist=0;
+numberOfCol=0;
+declare -i tableExist=0;
 
 read -p "Enter table name: " tableName
-while true
-do
+
 if [ -f $tableName ]; then
-	echo "Table is already exist"
-break
+	echo "Table is already exist";
+	tableExist=1;	
 else 
 	touch $tableName
 	echo "Table Created successfully"
 fi
 
+while true
+do
+	if (( $tableExist == 1 ));then
+		break;
+	fi
 	read -p "column name if you finish enter -1 : " col
-	if (( $col == -1  )); then
+	if (( $col == -1 )); then
 		break
 	else
 		
@@ -51,7 +56,7 @@ echo >> $tableName
 for (( i=0; i<$numberOfCol; i++ ))
 do
 read -p "Enter ${colNames[$i]} data type: " colData
-if (( $i != 0 )) && (( (($i)) != $numberOfCol ));then
+if (( $i != 0 )) && (( $i != $numberOfCol ));then
 echo -n ":" >> $tableName;
 fi
 colMetaData[$i]=$colData

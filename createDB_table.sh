@@ -5,12 +5,11 @@ select choice in CreateTable ListTables InsertTable UpdateTable DeleteTable Drop
 do
     case $choice in 
         CreateTable)
-        #echo "Create table"
-	. createTable.sh
+        createTable.sh
     ;;
-	ListTables)
-	ls
-	;;
+        ListTables)
+        ls -l
+    ;;
         InsertTable)
         echo "InsertTable"
     ;;
@@ -27,7 +26,7 @@ do
         echo "Backing"
         cd ~/DataBase
         break
-        ;;
+    ;;
         *)
         echo "Default"
     ;;
