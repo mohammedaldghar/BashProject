@@ -20,8 +20,10 @@ do
         echo "DropTable"
     ;;
         Back)
-        createDB_home.sh
-    ;;
+        echo "Backing"
+        cd ~/DataBase
+        break
+        ;;
         *)
         echo "Default"
     ;;

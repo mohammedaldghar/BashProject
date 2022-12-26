@@ -13,7 +13,7 @@ else
 fi
 
 #List some options to create database
-select choice in CreateDB ListDB DropDB ConnectToDB 'Press 5 to Exit'
+select choice in CreateDB ListDB DropDB ConnectToDB Exit
 do
     case $choice in 
         CreateDB )
@@ -50,17 +50,19 @@ do
         if [ -d $DBName ];then
             echo "DataBase Found"
             cd ~/DataBase/$DBName
-            echo "DataBase Connected Successfully"
-            createDB_table.sh
+            echo "DataBase Connected Successfully to $DBName"
+            pwd
+            . createDB_table.sh
         else 
             echo "DataBase Name Is Not Exist !!!"
         fi
     ;;
-        'Press 5 to Exit')
+        Exit)
         break
         ;;
             *)
         echo "Wrong Input"
     ;;
     esac
+    echo "1)CreateDB          2)ListDB          3)DropDB          4)ConnectToDB          5)Exit"
 done
