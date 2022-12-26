@@ -1,6 +1,6 @@
 export LC_COLLATE=C
 shopt -s extglob
-#export PS3= " >> "
+export PS3='>>> ';
 valid='+[a-zA-Z]';
 regex='[0-9][!@#$%^&*()_-+=/)]';
 
@@ -64,5 +64,5 @@ do
         echo "Wrong Input"
     ;;
     esac
-    echo "1)CreateDB          2)ListDB          3)DropDB          4)ConnectToDB          5)Exit"
+    echo "1)CreateDB          2)ListDB          3)DropDB          4)ConnectToDB        5)Exit"
 done
