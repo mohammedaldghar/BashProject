@@ -1,9 +1,14 @@
 export LC_COLLATE=C
 shopt -s extglob
 #export PS3= " >> "
+<<<<<<< HEAD
 valid='*[a-zA-Z]';
 regex='*([0-9]!@#$%^&*()_-+=/))';
 
+=======
+valid='+[a-zA-Z]';
+regex='[0-9][!@#$%^&*()_-+=/)]';
+>>>>>>> 703494e7f94eda020166b47b36c43c15c8f9c543
 
 #Check for parent director existence
 if [ -d ~/DataBase ];then
@@ -14,7 +19,11 @@ else
 fi
 
 #List some options to create database
+<<<<<<< HEAD
 select choice in 1-CreateDB 2-ListDB 3-DropDB 4-ConnectToDB  5-Exit
+=======
+select choice in CreateDB ListDB DropDB ConnectToDB Exit
+>>>>>>> 703494e7f94eda020166b47b36c43c15c8f9c543
 do
     case $choice in 
         1-CreateDB )
@@ -51,18 +60,28 @@ do
         if [ -d $DBName ];then
             echo "DataBase Found"
             cd ~/DataBase/$DBName
-            echo "DataBase Connected Successfully"
-            createDB_table.sh
+            echo "DataBase Connected Successfully to $DBName"
+            pwd
+            . createDB_table.sh
         else 
             echo "DataBase Name Is Not Exist !!!"
         fi
     ;;
+<<<<<<< HEAD
         5-Exit)
+=======
+        Exit)
+>>>>>>> 703494e7f94eda020166b47b36c43c15c8f9c543
         break
         ;;
             *)
         echo "Wrong Input"
     ;;
     esac
+<<<<<<< HEAD
 echo "1)CreateDB  2)ListDB   3)DropDB   4)ConnectToDB    5)Exit"
 done
+=======
+    echo "1)CreateDB          2)ListDB          3)DropDB          4)ConnectToDB          5)Exit"
+done
+>>>>>>> 703494e7f94eda020166b47b36c43c15c8f9c543

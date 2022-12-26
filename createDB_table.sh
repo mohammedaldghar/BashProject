@@ -20,8 +20,15 @@ do
         echo "DropTable"
     ;;
         Back)
+<<<<<<< HEAD
         break
     ;;
+=======
+        echo "Backing"
+        cd ~/DataBase
+        break
+        ;;
+>>>>>>> 703494e7f94eda020166b47b36c43c15c8f9c543
         *)
         echo "Default"
     ;;
