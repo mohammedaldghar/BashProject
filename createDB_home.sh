@@ -2,6 +2,7 @@ export LC_COLLATE=C
 shopt -s extglob
 #export PS3= " >> "
 valid='+[a-zA-Z]';
+#names mario and dghar
 
 
 #Check for parent director existence
