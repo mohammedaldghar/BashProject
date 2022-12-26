@@ -20,7 +20,7 @@ do
         echo "DropTable"
     ;;
         Back)
-        createDB_home.sh
+        break
     ;;
         *)
         echo "Default"

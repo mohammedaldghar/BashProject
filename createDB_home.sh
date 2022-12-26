@@ -1,13 +1,9 @@
 export LC_COLLATE=C
 shopt -s extglob
 #export PS3= " >> "
-valid='+[a-zA-Z]';
-<<<<<<< HEAD
-#names mario and dghar
+valid='*[a-zA-Z]';
+regex='*([0-9]!@#$%^&*()_-+=/))';
 
-=======
-regex='[0-9][!@#$%^&*()_-+=/)]';
->>>>>>> c71d6cb353c8635882cfca1b66c330c643c0287f
 
 #Check for parent director existence
 if [ -d ~/DataBase ];then
@@ -18,10 +14,10 @@ else
 fi
 
 #List some options to create database
-select choice in CreateDB ListDB DropDB ConnectToDB 'Press 5 to Exit'
+select choice in 1-CreateDB 2-ListDB 3-DropDB 4-ConnectToDB  5-Exit
 do
     case $choice in 
-        CreateDB )
+        1-CreateDB )
         read -p "Enter DataBase Name : " DBName
         if [[ $DBName != $regex ]];then
             if [ -d $DBName ];then
@@ -34,11 +30,11 @@ do
           echo "Wrong Input Format."
         fi
     ;;
-        ListDB )
+        2-ListDB )
         echo "DataBase ListDB : "
         ls -F ~/DataBase | grep /
     ;;
-        DropDB )
+        3-DropDB )
         echo "DataBase DropDB"
         read -p "Enter DataBase Name : " DBName
         if [ -d $DBName ];then
@@ -49,7 +45,7 @@ do
             echo "DataBase Name Is Not Exist !!!"
         fi
     ;; 
-        ConnectToDB )
+        4-ConnectToDB )
         echo "DataBase ConnectToDB"
          read -p "Enter DataBase Name : " DBName
         if [ -d $DBName ];then
@@ -61,11 +57,12 @@ do
             echo "DataBase Name Is Not Exist !!!"
         fi
     ;;
-        'Press 5 to Exit')
+        5-Exit)
         break
         ;;
             *)
         echo "Wrong Input"
     ;;
     esac
+echo "1)CreateDB  2)ListDB   3)DropDB   4)ConnectToDB    5)Exit"
 done
