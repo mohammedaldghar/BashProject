@@ -21,6 +21,7 @@ do
     ;;
         DropTable)
         echo "DropTable"
+	dropTable.sh
     ;;
         Back)
         echo "Backing"
