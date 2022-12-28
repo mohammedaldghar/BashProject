@@ -27,6 +27,7 @@ do
 	fi
 	read -p "column name if you finish enter -1 : " col
 	if (( $col == -1 )); then
+		echo >> ./$tableName   
 		break
 	else
 		
@@ -52,17 +53,24 @@ do
 
 	fi
 done
-echo >> $tableName
+# echo >> $tableName
 for (( i=0; i<$numberOfCol; i++ ))
 do
-read -p "Enter ${colNames[$i]} data type: " colData
-if (( $i != 0 )) && (( $i != $numberOfCol ));then
-echo -n ":" >> $tableName;
-fi
-colMetaData[$i]=$colData
-if (( $i == 0 ));then
-echo -n $colData"(PK)" >> $tableName
-else
-echo -n $colData >> $tableName
-fi
+	if [[ $i == 0 ]];then
+		read -p "Enter ${colNames[$i]}(PK) data type: " colData
+	else
+		read -p "Enter ${colNames[$i]} data type: " colData
+	fi
+	if (( $i != 0 )) && (( $i != $numberOfCol ));then
+	echo -n ":" >> $tableName;
+	fi
+	colMetaData[$i]=$colData
+	if (( $i == 0 ));then
+	echo -n $colData >> $tableName
+	else
+	echo -n $colData >> $tableName
+	fi
+	if (( $i+1 == $numberOfCol ));then
+        echo >> ./$tableName   
+    fi
 done

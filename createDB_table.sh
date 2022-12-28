@@ -11,7 +11,7 @@ do
         ls -l
     ;;
         InsertTable)
-        echo "InsertTable"
+        insertTable.sh
     ;;
         UpdateTable)
         echo "UpdateTable"
