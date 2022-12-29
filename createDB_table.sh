@@ -17,7 +17,7 @@ do
         echo "UpdateTable"
     ;;
         DeleteTable)
-        echo "DeleteTable"
+        deleteRecord.sh
     ;;
         DropTable)
         echo "DropTable"

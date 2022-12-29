@@ -36,14 +36,13 @@ echo "colData" ${colData[@]};
 declare -i colDataLength=${#colData[@]};
 echo "colDataLength" $colDataLength
 read -p "Enter data you want to delete: " data
-	for (( i=0;i<$colDataLength;i++ ))
+	for (( j=0;j<$colDataLength;j++ ))
 	do
-		if [[ ${colData[$i]} == $data ]];then
+		if [[ ${colData[$j]} == $data ]];then
 			declare -i tmp=0
-			((tmp=${colData[$i]}+2));
-			if [[ $tmp == 2 ]];then
-				if [[ $regexNum =~ $data ]];then
-					sed -i "$tmp"d ./$tableName
+			((tmp=$j+2));
+				if [[ $regexNum == $data ]];then
+					`sed -i "$tmp d" ./$tableName`
 					echo "with if"
 					break;
 				else
@@ -54,7 +53,7 @@ read -p "Enter data you want to delete: " data
 
 			else
 				if [[ $regexNum =~ $data ]];then
-					sed -i "$tmp"d ./$tableName
+					`sed -i "$tmp d" ./$tableName`
 					echo "with if"
 					break;
 				else
@@ -62,8 +61,6 @@ read -p "Enter data you want to delete: " data
 					echo "with else"
 					break;
 				fi
-			fi
-
 		else
 			echo "Not Found"
 		fi
