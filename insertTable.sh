@@ -17,8 +17,8 @@ if ! [[ -f $tName ]]; then
 fi
 
 invalid=0
-regex="^[0-9]+$"
-regexChar="^[a-zA-Z]+[0-9]*"
+regex='^[0-9]+$'
+regexChar='^[a-zA-Z]+[0-9]*$'
 # echo >> ~/DataBase/$DBName/$tName
 counter=$(head -1 ~/DataBase/$DBName/$tName | awk -F: '{print NF}')
 numberOfLines=$(sed -n '3,$p' ~/DataBase/$DBName/$tName | wc -l)
@@ -61,29 +61,36 @@ for ((i = 0; i < $colNamesLenght; i++)); do
 
     read -p "Enter value ${colNames[$i]} : " inp
 
-    if [[ $i == 0 && $inp =~ $regex ]]; then
-        flag=0
-        for ((j = 0; j < $numberOfLines; j++)); do
-            if [[ $inp == ${firstField[$j]} ]]; then
-                echo ${colNames[$i]} $inp" Already Exist"
-                flag=1
+    if (( $i == 0 )) ; then
+        if [[ $inp =~ $regex || $inp =~ $regexChar ]];then
+            echo "Integers"
+            flag=0
+            for ((j = 0; j < $numberOfLines; j++)); do
+                if [[ $inp == "${firstField[$j]}" ]]; then
+                    echo "${colNames[$i]}" "$inp" " Already Exist"
+                    flag=1
+                    break
+                fi
+            done
+            if [[ $flag == 0 ]]; then
+                inpElements[$i]=$inp
+            else
+                invalid=1
                 break
             fi
-        done
-        if [[ $flag == 0 ]]; then
-            inpElements[$i]=$inp
-        else
-            break
         fi
-    elif [[ $inp =~ $regexChar ]]; then
-        inpElements[$i]=$inp
-    elif [[ $inp =~ $regex ]]; then
-        inpElements[$i]=$inp
     else
-        invalid=1
-        echo "not valid input"
+        if [[ $inp =~ $regexChar ]]; then
+                echo "Characters"
+                inpElements[$i]=$inp
+        elif [[ $inp =~ $regex ]]; then
+                echo "Integers"
+                inpElements[$i]=$inp
+        else
+                invalid=1
+                echo "not valid input"
+        fi
     fi
-
 done
 
 declare -i inpElementsLength=${#inpElements[@]}
@@ -95,10 +102,10 @@ for ((i = 0; i < $inpElementsLength; i++)); do
     if [[ $i != 0 ]]; then
         echo -n ":" >>~/DataBase/$DBName/$tName
     fi
-    
+
     echo -n ${inpElements[$i]} >>~/DataBase/$DBName/$tName
 
-    if (($i+1 == $inpElementsLength)); then
+    if (($i + 1 == $inpElementsLength)); then
         echo >>~/DataBase/$DBName/$tName
     fi
 done
