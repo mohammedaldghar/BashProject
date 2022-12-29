@@ -22,43 +22,6 @@ if [ ! -f $tableName ]; then
 	echo "Table is not exist"
 	createDB_table.sh
 fi
-<<<<<<< HEAD
-done
-if (( $flag==0 ));then
-echo "this column is not exist"
-else
-colNumber=$colNumber+1
-colData=($(sed -n '3,$p' ./$tableName| cut -d: -f$colNumber))
-echo "colData" ${colData[@]};
-declare -i colDataLength=${#colData[@]};
-echo "colDataLength" $colDataLength
-read -p "Enter data you want to delete: " data
-	for (( j=0;j<$colDataLength;j++ ))
-	do
-		if [[ ${colData[$j]} == $data ]];then
-			declare -i tmp=0
-			((tmp=$j+2));
-				if [[ $regexNum == $data ]];then
-					`sed -i "$tmp d" ./$tableName`
-					echo "with if"
-					break;
-				else
-					sed -i ''/"$data"/d'' ./$tableName
-					echo "with else with temp"
-					break;
-				fi
-
-			else
-				if [[ $regexNum =~ $data ]];then
-					`sed -i "$tmp d" ./$tableName`
-					echo "with if"
-					break;
-				else
-					sed -i ''/"$data"/d'' ./$tableName
-					echo "with else"
-					break;
-				fi
-=======
 
 
 select choice in DeleteByColumnName DeleteAll Back; do
@@ -75,7 +38,6 @@ select choice in DeleteByColumnName DeleteAll Back; do
 		done
 		if (($flag == 0)); then
 			echo "this column is not exist"
->>>>>>> ade02427a1522009f9c8c5a31cb4020ce1b2d04e
 		else
 			colNumber=$colNumber+1
 
@@ -97,7 +59,8 @@ select choice in DeleteByColumnName DeleteAll Back; do
 
 					echo "col data : " ${colData[$i]};
 					tmp=0
-					tmp=$i+3
+	
+				tmp=$i+3
 
 					if ! [[ $data =~ $re ]] ; then
 							echo "CHARACTERS";
