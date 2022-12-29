@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 export LC_COLLATE=C
 shopt -s extglob
 
@@ -14,22 +16,20 @@ do
         insertTable.sh
     ;;
         UpdateTable)
-        echo "UpdateTable"
+        updateTable.sh
     ;;
         DeleteTable)
         deleteRecord.sh
     ;;
         DropTable)
-        echo "DropTable"
-	dropTable.sh
+        dropTable.sh
     ;;
         Back)
-        echo "Backing"
         cd ~/DataBase
         break
     ;;
         *)
-        echo "Default"
+        echo "Wrong Input"
     ;;
     esac
 echo '1)CreateTable       2)ListTables       3)InsertTable       4)UpdateTable       5)DeleteTable       6)DropTable       7)Back'

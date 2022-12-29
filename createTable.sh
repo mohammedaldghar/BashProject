@@ -1,16 +1,23 @@
+#!/usr/bin/bash
+
 export LC_COLLATE=C
 shopt -s extglob
-
-
 typeset -i numberOfCol
 declare -a colNames
 typeset -i IsExist
-
 IsExist=0;
 numberOfCol=0;
 declare -i tableExist=0;
+regex='^[0-9]+$'
+regexChar='^[a-zA-Z]+[0-9]+'
+
 
 read -p "Enter table name: " tableName
+
+if ! [[ $tableName =~ $regexChar ]];then
+	echo "Wrong Format..."
+	createDB_table.sh
+fi
 
 if [ -f $tableName ]; then
 	echo "Table is already exist";

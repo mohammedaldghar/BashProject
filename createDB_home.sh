@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 export LC_COLLATE=C
 shopt -s extglob
 export PS3='>>> ';
@@ -52,6 +54,9 @@ do
         ConnectToDB )
         echo "DataBase ConnectToDB"
          read -p "Enter DataBase Name : " DBName
+        #  if [[ $DBName =~ " " ]];then
+        #     continue;
+        #  fi
         if [ -d $DBName ];then
             echo "DataBase Found"
             cd ~/DataBase/$DBName
@@ -60,7 +65,8 @@ do
             . createDB_table.sh
         else 
             echo "DataBase Name Is Not Exist !!!"
-        fi
+            fi
+        
     ;;
         Exit)
         break
