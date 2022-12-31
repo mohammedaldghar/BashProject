@@ -2,79 +2,74 @@
 
 export LC_COLLATE=C
 shopt -s extglob
-export PS3='>>> ';
-#valid='+[a-zA-Z]';
-regex='^[0-9!@#$%^&*()_-+=/)]*';
-#valid='+[[a-zA-Z0-9]]';
-#regex='+[[0-9][!@#$%^&*()_-+=/)]]';
-#Check for parent director existence
+export PS3='>>> '
+valid='^[a-zA-Z]+'
+regex='^[!@#$%^&*:;.()_-+=/)]*$'
 export DBName
 
-
-if [ -d ~/DataBase ];then
-    cd ~/DataBase
+if [ -d ~/DataBase ]; then
+    cd ~/DataBase || exit
 else
     mkdir ~/DataBase
-    cd ~/DataBase
+    cd ~/DataBase || exit
 fi
 
-
 #List some options to create database
-select choice in CreateDB ListDB DropDB ConnectToDB Exit
-do
-    case $choice in 
-        CreateDB )
-        read -p "Enter DataBase Name : " DBName
-        if ! [[ $DBName == $regex ]];then
-            if [ -d $DBName ];then
+select choice in CreateDB ListDB DropDB ConnectToDB Exit; do
+    cd ~/DataBase/ || exit
+    case $choice in
+    CreateDB)
+        read -r -p "Enter DataBase Name : " DBName
+        if [[ $DBName =~ $valid && $DBName != *' '* && $DBName != $regex ]]; then
+            if [ -d $DBName ]; then
                 echo "DataBase Name Already Exist !!!"
-            else 
+            else
                 mkdir ./$DBName
                 echo "DataBase Created Successfully !!!"
             fi
         else
-          echo "Wrong Input Format."
+            echo "Wrong Input Format."
         fi
-    ;;
-        ListDB )
+        ;;
+    ListDB)
         echo "DataBase ListDB : "
         ls -F ~/DataBase | grep /
-    ;;
-        DropDB )
+        ;;
+    DropDB)
         echo "DataBase DropDB"
-        read -p "Enter DataBase Name : " DBName
-        if [ -d $DBName ];then
+        read -r -p "Enter DataBase Name : " DBName
+        if [ -d $DBName ]; then
             echo "DataBase Found"
             rm -r $DBName
             echo "DataBase Removed Successfully"
-        else 
+        else
             echo "DataBase Name Is Not Exist !!!"
         fi
-    ;; 
-        ConnectToDB )
+        ;;
+    ConnectToDB)
         echo "DataBase ConnectToDB"
-         read -p "Enter DataBase Name : " DBName
-        #  if [[ $DBName =~ " " ]];then
-        #     continue;
-        #  fi
-        if [ -d $DBName ];then
+        read -p "Enter DataBase Name : " DBName
+        if ! [[ $DBName =~ $valid ]]; then
+            echo "Name Can't be empty !!!"
+            continue
+        fi
+        if [ -d $DBName ]; then
             echo "DataBase Found"
-            cd ~/DataBase/$DBName
+            cd ~/DataBase/$DBName || exit
             echo "DataBase Connected Successfully to $DBName"
             pwd
-            . createDB_table.sh
-        else 
+            createDB_table.sh
+        else
             echo "DataBase Name Is Not Exist !!!"
-            fi
-        
-    ;;
-        Exit)
+        fi
+        ;;
+    Exit)
+        echo "Bye..."
         break
         ;;
-            *)
+    *)
         echo "Wrong Input"
-    ;;
+        ;;
     esac
     echo "1)CreateDB          2)ListDB          3)DropDB          4)ConnectToDB        5)Exit"
-    
 done

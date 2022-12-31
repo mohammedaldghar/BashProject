@@ -8,23 +8,23 @@ typeset -i IsExist
 IsExist=0;
 numberOfCol=0;
 declare -i tableExist=0;
-regex='^[0-9]+$'
-regexChar='^[a-zA-Z]+[0-9]+'
+valid='^[a-zA-Z]+';
+regex='^[!@#$%^&*:;.()_-+=/)]*$';
 
 
 read -p "Enter table name: " tableName
 
-if ! [[ $tableName =~ $regexChar ]];then
+if [[ $tableName =~ $valid && $tableName != *' '* && $tableName != $regex ]];then
+	if [ -f $tableName ]; then
+		echo "Table is already exist";
+		tableExist=1;	
+	else 
+		touch $tableName
+		echo "Table Created successfully"
+	fi
+else
 	echo "Wrong Format..."
-	createDB_table.sh
-fi
-
-if [ -f $tableName ]; then
-	echo "Table is already exist";
-	tableExist=1;	
-else 
-	touch $tableName
-	echo "Table Created successfully"
+	tableExist=1;
 fi
 
 while true
@@ -60,7 +60,6 @@ do
 
 	fi
 done
-# echo >> $tableName
 for (( i=0; i<$numberOfCol; i++ ))
 do
 	if [[ $i == 0 ]];then

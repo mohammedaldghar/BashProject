@@ -3,37 +3,35 @@
 export LC_COLLATE=C
 shopt -s extglob
 
-select choice in CreateTable   ListTables   InsertTable   UpdateTable   DeleteTable   SelectFromTable   DropTable   Back
-do
-    case $choice in 
-        CreateTable)
+select choice in CreateTable ListTables InsertTable UpdateTable DeleteTable SelectFromTable DropTable Back; do
+    case $choice in
+    CreateTable)
         createTable.sh
-    ;;
-        ListTables)
+        ;;
+    ListTables)
         ls -l
-    ;;
-        InsertTable)
+        ;;
+    InsertTable)
         insertTable.sh
-    ;;
-        UpdateTable)
+        ;;
+    UpdateTable)
         updateTable.sh
-    ;;
-        DeleteTable)
+        ;;
+    DeleteTable)
         deleteRecord.sh
-    ;;
-	SelectFromTable)
-	selectFromTable.sh
-;;
-        DropTable)
+        ;;
+    SelectFromTable)
+        selectFromTable.sh
+        ;;
+    DropTable)
         dropTable.sh
-    ;;
-        Back)
-        cd ~/DataBase
+        ;;
+    Back)
         break
-    ;;
-        *)
+        ;;
+    *)
         echo "Wrong Input"
-    ;;
+        ;;
     esac
-echo '1)CreateTable       2)ListTables       3)InsertTable       4)UpdateTable       5)DeleteTable       6)SelectFromTable       7)DropTable       8)Back'
+    echo '1)CreateTable       2)ListTables       3)InsertTable       4)UpdateTable       5)DeleteTable       6)SelectFromTable       7)DropTable       8)Back'
 done
